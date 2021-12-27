@@ -1,0 +1,37 @@
+version: "3.7"
+services:
+  web:
+    build:
+      context: .
+      dockerfile: Dockerfile-web
+    environment:
+      - ALLOW_OVERRIDE=true
+    ports:
+      - 127.0.0.1:8011:80
+    links:
+      - db
+    volumes:
+      - ./web:/var/www/html
+      - ./log/apache2:/var/log/apache2
+  db:
+    image: mariadb
+    restart: always
+    volumes:
+      - ./mariadb:/var/lib/mysql
+      - .log/mariadb:/var/log/mysql
+    environment:
+      MARIADB_ROOT_PASSWORD: root
+      MARIADB_USER: admin
+      MARIADB_PASSWORD: admin
+      MARIADB_DATABASE: database
+    ports:
+      - 127.0.0.1:8012:3306
+  phpmyadmin:
+      image: phpmyadmin
+      restart: always
+      ports:
+        - 127.0.0.1:8013:80
+      links:
+        - db
+      environment:
+        - PMA_HOST=db
