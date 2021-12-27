@@ -11,8 +11,8 @@ Clean unused
 > docker system prune -a
 
 ## Remarks
-- Adapt PHP version and extensions to use in Dockerfile-web
-- Remove IP 127.0.0.1 on ports to allow remote access to services (leave 127.0.0.1 to work with an nginx reverse-proxy for instance)
+- Adapt PHP version and extensions in Dockerfile-web
+- Remove IP 127.0.0.1 on *ports* to allow remote access to services (leave 127.0.0.1 to work with an nginx reverse-proxy)
 - Logs are located in *log*
 - Apache files folder is *web*
 - Database files are placed in *mariadb*
