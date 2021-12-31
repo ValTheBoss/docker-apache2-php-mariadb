@@ -6,6 +6,7 @@ services:
       dockerfile: Dockerfile-web
     environment:
       - ALLOW_OVERRIDE=true
+      - TZ=Europe/Zurich
     ports:
       - 127.0.0.1:8011:80
     links:
@@ -13,6 +14,7 @@ services:
     volumes:
       - ./web:/var/www/html
       - ./log/apache2:/var/log/apache2
+    restart: always  
   db:
     image: mariadb
     restart: always
@@ -35,3 +37,5 @@ services:
         - db
       environment:
         - PMA_HOST=db
+        - UPLOAD_LIMIT=300M
+        - PMA_ABSOLUTE_URI=https://<domain>
