@@ -8,3 +8,4 @@ RUN docker-php-ext-install exif && docker-php-ext-enable exif
 RUN docker-php-ext-install gd && docker-php-ext-enable gd
 RUN apt-get update && apt install -y libzip-dev libpng-dev
 RUN docker-php-ext-install zip && docker-php-ext-enable zip
+RUN a2enmod rewrite
